@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\tasks;
 
 class tasksTableSeeder extends Seeder
 {
@@ -17,21 +18,21 @@ class tasksTableSeeder extends Seeder
       'name' => 'tony',
       
     ];
-    Task::create($param);
+    tasks::create($param);
     $param = [
       'name' => 'jack',
       
     ];
-    Task::create($param);
+    tasks::create($param);
     $param = [
       'name' => 'sara',
       
     ];
-    Task::create($param);
+    tasks::create($param);
     $param = [
       'name' => 'saly',
       
     ];
-    Task::create($param);
+    tasks::create($param);
     }
 }

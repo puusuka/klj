@@ -8,12 +8,12 @@
     <body>
         <h1>お店一覧</h1>
 
-        @foreach ($tasks as $task)
-            <p>
+          @foreach ($tasks as $task) 
+             <p> 
                
-                {{ $tasks->name }},
+                 {{ $tasks->name }} 
                 
-            </p>
-        @endforeach
+             </p> 
+         @endforeach 
     </body>
 </html>

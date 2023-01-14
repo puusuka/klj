@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\todo;
 use Illuminate\Http\Request;
+use App\Models\tasks;
 
 class TodoController extends Controller
 {
@@ -14,8 +13,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $tasks = Tasks::all();
-        return view('index', ['tasks' => $tasks]);
+        $tasks = Task::all();
+        return view('index'
+         , ['tasks' => $tasks]);
     }
 
     /**

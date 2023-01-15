@@ -11,7 +11,7 @@
           @foreach ($tasks as $task) 
              <p> 
                
-                 {{ $tasks->name }} 
+                 {{ $task->name }} 
                 
              </p> 
          @endforeach 

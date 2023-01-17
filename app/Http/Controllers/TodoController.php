@@ -13,9 +13,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = tasks::all();
         return view('index'
-         , ['tasks' => $tasks]);
+        , ['tasks' => $tasks]);
     }
 
     /**
@@ -36,7 +36,12 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $tasks = new tasks;
+        $tasks->name = request('name');
+        $tasks->save();
+        //  return view('index', ['tasks' => $tasks]);
+         return redirect()->route('todo.list', ['name' => $tasks->name]);
+
     }
 
     /**

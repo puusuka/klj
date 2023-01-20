@@ -36,7 +36,7 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-         $tasks = new tasks;
+          $tasks = new tasks;
         $tasks->name = request('name');
         $tasks->save();
         //  return view('index', ['tasks' => $tasks]);
@@ -84,8 +84,10 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(todo $todo)
+    public function destroy($id)
     {
-        //
+        $tasks = tasks::find($id);
+        $tasks->delete();
+        return redirect('/todo');
     }
 }

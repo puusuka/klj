@@ -13,7 +13,8 @@ use App\Http\Controllers\TodoController;
 |
 */
 Route::get('/todo', [TodoController::class, 'index'])->name('todo.list');
- Route::post('/todo/update', [TodoController::class, 'store'])->name('todo.store');
+Route::post('/todo/update', [TodoController::class, 'store'])->name('todo.store');
+Route::post('/todo/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
 
 
 

@@ -6,7 +6,11 @@
         <style>body {padding: 10px;}</style>
     </head>
     <body>
-        <h1>お店一覧</h1>
+        <form action="/todo/update" method="POST">
+        @csrf
+         <input type="text" class="input-update" value= "" name="name">
+         <input type="submit" name="submit" value="送信する" />
+        </form>
        <table>
          
         <tr>
@@ -24,22 +28,26 @@
           {{ $task->created_at }}
         </td> 
           
-       <form action="/todo/update" method="POST">
-        @csrf
+       
                 <td>
                 
-                     <input type="text" class="input-update" value= "{{ $task->name }}" name="content">  
+                     <input type="text" class="input-update" value= "{{ $task->name }}" name="name">  
             </td>
             <td>
-           <input type="submit" name="submit" value="送信する" />
+          
+          </td>
+           <td>
+          <form action="{{ route('todo.destroy', [$tasks->id]) }}" method="POST"> 
+         @csrf 
+         
+         
+                   <button type="submit" class="btn btn-danger">削除</button> 
+           </form> 
+        
 
           </td>
-           {{--<td>
-            <a href={{ route('todo.store') }} class='btn btn-outline-primary'>削除</a>
-
-          </td>--}}
                    
-         </form>
+        
          @endforeach 
       </table>
     </body>

@@ -88,6 +88,6 @@ class TodoController extends Controller
     {
         $tasks = tasks::find($id);
         $tasks->delete();
-        return redirect('/todo');
+        return redirect()->route('todo.list');
     }
 }

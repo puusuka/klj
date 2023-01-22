@@ -37,7 +37,7 @@
           
           </td>
            <td>
-          <form action="{{ route('todo.destroy', [$tasks->id]) }}" method="POST"> 
+          <form action="{{ route('todo.destroy', [ 'id' => $tasks->id]) }}" method="POST"> 
          @csrf 
          
          

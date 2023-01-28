@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\tasks;
+use App\Http\Requests\ClientRequest;
+
 
 class TodoController extends Controller
 {
@@ -73,9 +75,15 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, todo $todo)
-    {
-        //
+    public function update(Request $request)
+    {   
+        $tasks = new tasks();
+        $tasks->name = $request->name;   
+        // $tasks = new tasks;
+        // $tasks->name = request('name');
+        // $tasks = tasks::find($id);
+        $tasks->save();
+        return redirect()->route('todo.list');
     }
 
     /**

@@ -1,12 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\tasks;
-use App\Http\Requests\ClientRequest;
+namespace App\Http\Controllers;             
+// ファイルがある場所
+use Illuminate\Http\Request;         
+//   Requestの機能を使うため。  
+use App\Models\tasks;                 
+// ファイルがある場所
+use App\Http\Requests\ClientRequest;    
+// ファイルがある場所
 
 
 class TodoController extends Controller
+// Controllerクラスを継承して、コントローラーの機能をつかうため。Controllerがスーパークラス（親クラス）、TodoControllerが サブクラス（子クラス）。親クラスの機能を継承する。
+// class Animal {　  public function bark() {
+        // return $this->name . ' barks';
+    // }
+// }
+// class Dog extends Animal {
+
+    // 犬が鳴く（動物クラスのbarkをオーバーライド
+    // public function bark() {
+        // return $this->name . ' barks Wan Wan';
+    // }
+// }
+// / これみたいに継承して上書きすることができる。（オーバーライド）
+// 継承するということはスーパークラスのメソッドを呼ぶことにつながる。
+// https://e-seventh.com/php-class-inheritance/
+
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +34,14 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $tasks = tasks::all();
-        return view('index'
+    // indexメソッド
+    {   
+        $tasks = tasks::first();
+
+        // $tasks = tasks::all(); 
+      //タスクテーブルからすべて取り出します。
+        
+      return view('index'
         , ['tasks' => $tasks]);
     }
 
@@ -38,7 +63,7 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-          $tasks = new tasks;
+         $tasks = tasks::find($id);
         $tasks->name = request('name');
         $tasks->save();
         //  return view('index', ['tasks' => $tasks]);

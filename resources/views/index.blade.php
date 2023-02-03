@@ -22,7 +22,7 @@
             <th>更新</th>
             <th>削除</th>
         </tr>
-          @foreach ($tasks as $task) 
+           @foreach ($tasks as $task)   
         <tr>
                
                  
@@ -45,7 +45,7 @@
            </form> --}}
           </td>
            <td>
-          <form action="{{ route('todo.destroy', [ 'id' => $task->id]) }}" method="POST"> 
+          <form action="{{ route('todo.destroy', [ 'id' => $task->id]) }}" method="post"> 
          @csrf 
          
          
@@ -56,7 +56,7 @@
           </td>
                    
         
-         @endforeach 
+           @endforeach   
       </table>
     </body>
 </html>

@@ -33,13 +33,20 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     // indexメソッド
     {   
-        $tasks = tasks::first();
+        //$tasks = tasks::first();
+        //データベースの最初だけ取り出します。
 
-        // $tasks = tasks::all(); 
-      //タスクテーブルからすべて取り出します。
+        //$tasks = tasks::all(); 
+        //タスクテーブルからすべて取り出します。
+        //$tasks = \DB::table('tasks')->get();
+        //$tasks = tasks::all();と同じ機能 
+        $tasks = tasks::get();
+        //$tasks = tasks::all();と同じ機能 
+      
         
       return view('index'
         , ['tasks' => $tasks]);
@@ -63,11 +70,12 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-         $tasks = tasks::find($id);
+         
+        $tasks = new tasks;
         $tasks->name = request('name');
         $tasks->save();
         //  return view('index', ['tasks' => $tasks]);
-         return redirect()->route('todo.list', ['name' => $tasks->name]);
+        return redirect()->route('todo.list', ['name' => $tasks->name]);
 
     }
 
@@ -100,10 +108,12 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {   
-        $tasks = new tasks();
-        $tasks->name = $request->name;   
+    public function update( Request $request,$id)
+    {   $tasks = tasks::find($id);
+        //tasks::find($request->id)->update([
+           // 'name' => $request->name,]);
+        $tasks->name = $request->input('name');
+        //$tasks->created_at = $request->input('created_at');    
         // $tasks = new tasks;
         // $tasks->name = request('name');
         // $tasks = tasks::find($id);
@@ -117,7 +127,7 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id )
     {
         $tasks = tasks::find($id);
         $tasks->delete();

@@ -15,14 +15,14 @@
          <input type="submit" name="submit" value="送信する" />
         </form>
        <table>
-         
+         @csrf 
         <tr>
             <th>作成日</th>
             <th>タスク名</th>
             <th>更新</th>
             <th>削除</th>
         </tr>
-           @foreach ($tasks as $task)   
+        @foreach ($tasks as $task)   
         <tr>
                
                  
@@ -31,19 +31,21 @@
           {{ $task->created_at }}
         </td> 
           
-       
+            <form action="{{ route('todo.new', [ 'id' => $task->id]) }}" method="POST"> 
+            @csrf 
+         
                 <td>
                 
                      <input type="text" class="input-update" value= "{{ $task->name }}" name="name">  
             </td>
             <td>
-          {{--<form action="{{ route('todo.new', [ 'id' => $task->id]) }}" method="POST"> 
-         @csrf 
+          
          
          
-                   <button type="submit" class="btn btn-danger" name="name">更新</button> 
-           </form> --}}
+                   <button type="submit" class="btn btn-danger"  name="name" value= "{{ $task->name }}" >更新</button> 
+           
           </td>
+          </form> 
            <td>
           <form action="{{ route('todo.destroy', [ 'id' => $task->id]) }}" method="post"> 
          @csrf 

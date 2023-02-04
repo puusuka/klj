@@ -51,7 +51,7 @@ use App\Http\Controllers\TodoController;
 // もっとも基本的なLaravelルートはURIとクロージャを引数に取り、複雑なルーティング設定ファイルなしでもルートと動作を定義できる、非常にシンプルで表現力豊かなメソッドを提供しています。
 Route::get('/todo', [TodoController::class, 'index'])->name('todo.list');
 // 　todoコントローラーのindexメソッドを使う。
-Route::post('/todo/update', [TodoController::class, 'update'])->name('todo.store');
+Route::post('/todo/update', [TodoController::class, 'store'])->name('todo.store');
 // 第1引数にはURIを、第2引数にはそれによって呼び出される処理。[クラス名::class, ‘アクションメソッド名’]
 Route::post('/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
 // PHPではシングルアロー演算子(->)が配列へのアクセスに使うのに対して、ダブルアロー演算子(=>)は配列に値を代入するときに使います。https://webukatu.com/wordpress/blog/39841/#i，プロパティへのアクセス。
@@ -64,7 +64,7 @@ Route::post('/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('tod
 // インスタンスから矢印「->」を続けてメソッド名を記述することで、呼び出すことができます。
 
 
-// Route::post('/todo/new/{id}', [TodoController::class, 'update'])->name('todo.new');
+Route::post('/todo/new/{id}', [TodoController::class, 'update'])->name('todo.new');
 // メソッドやルートに指定するのは「get」と「post」のどちらかになります。
 
 // ページを表示する場合はget、データの処理（データの追加や削除、更新）を行う場合はpostメソッドを使用いたします。

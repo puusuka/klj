@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;             
 // ファイルがある場所
 use Illuminate\Http\Request;         
-//   Requestの機能を使うため。  
+//   Requestの機能を使うため。
+//依存注入により、現在のHTTPリクエストインスタンスを取得するには、タイプヒントでIlluminate\Http\Requestクラスをコントローラーメソッドに指定します。  
 use App\Models\tasks;                 
 // ファイルがある場所
 use App\Http\Requests\ClientRequest;    
@@ -69,11 +70,19 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    //丸括弧内には「Request $request」とありますが、このように記述することで「$requestにフォームやURLのパスパラメータから受け取った情報を代入」しています。より正確に説明すると、Requestクラスを$requestにインスタンス化している、のですが、現状はLaravelの機能で「Request 変数名」というように記述するとフォーム等に入力された情報を受け取ることができる。
     {
          
         $tasks = new tasks;
-        $tasks->name = request('name');
+        //新しいデータベースを作る
+        $tasks->name  = $request->input('name');
+        //$tasks->name = request('name');と同じ。
+        // $tasks->name このコードが意味するのはタスクテーブルのnameカラムということで、$request->input('name');　このコードが意味するnameもタスクテーブルのnameカラム。
+        //フォームから受けとったリクエストをnameに代入する。その時にcreated-atも自動で作られる。
+
+
         $tasks->save();
+        //作られたデータベースを保存する
         //  return view('index', ['tasks' => $tasks]);
         return redirect()->route('todo.list', ['name' => $tasks->name]);
 
@@ -109,15 +118,14 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request,$id)
+    //$requestと$idを受け取るからここにはこうかく。
     {   $tasks = tasks::find($id);
-        //tasks::find($request->id)->update([
-           // 'name' => $request->name,]);
+        //(x)だとxのデータを所得する。
         $tasks->name = $request->input('name');
-        //$tasks->created_at = $request->input('created_at');    
-        // $tasks = new tasks;
-        // $tasks->name = request('name');
-        // $tasks = tasks::find($id);
+        //$tasks->name = request('name');と同じ
+        //フォームに入った名前をタスクの名前にする。
         $tasks->save();
+        //データベースに保存
         return redirect()->route('todo.list');
     }
 
@@ -130,7 +138,9 @@ class TodoController extends Controller
     public function destroy(Request $request,$id )
     {
         $tasks = tasks::find($id);
+        //idを見つけ出して
         $tasks->delete();
+        //そのテーブルを削除する
         return redirect()->route('todo.list');
     }
 }

@@ -8,6 +8,7 @@
         {{--文字コードのutf-8を使うよー--}}
         <title>Lunchmap</title>
         {{--タイトルはランチマップ--}}
+    </head>
         <style>
         * {
            outline: 1px solid red !important;
@@ -15,7 +16,7 @@
 
         .all{
           background-color:blue;
-          height:10%;
+          
 
         }
  
@@ -36,22 +37,22 @@
         }
          
         </style>
-    </head>
-    <body>
+    
+<body>
   <div class="all">
      <div class="card">
-      <h1>Todo List</h1>
-      <div class="new">
+         <h1>Todo List</h1>
+       <div class="new">
           <form action="/todo/update" method="POST" >
-          @csrf
-          @if (count($errors) > 0)
-          <p>入力に問題があります</p>
-          @endif
-          <input type="text" class="input-update" value= "" name="name">
-          <input type="submit" name="submit" value="追加" />
+            @csrf
+            @if (count($errors) > 0)
+             <p>入力に問題があります</p>
+            @endif
+            <input type="text" class="input-update" value= "" name="name">
+            <input type="submit" name="submit" value="追加" />
           </form>
-      </div>
-      <div class="table">
+       </div>
+       <div class="table">
         <table>
          @csrf 
          <tr>
@@ -59,47 +60,31 @@
             <th>タスク名</th>
             <th>更新</th>
             <th>削除</th>
-        </tr>
+         </tr>
         @foreach ($tasks as $task)   
-        <tr>
-               
-                 
+         <tr>
           <td>
-        
-          {{ $task->created_at }}
-         </td> 
-          
-            <form action="{{ route('todo.new', [ 'id' => $task->id]) }}" method="POST"> 
+            {{ $task->created_at }}
+          </td> 
+          <form action="{{ route('todo.new', [ 'id' => $task->id]) }}" method="POST"> 
             @csrf 
-         
-                <td>
-                
-                     <input type="text" class="input-update" value= "{{ $task->name }}" name="name">  
-               </td>
-            <td>
-          
-         
-         
-                   <button type="submit" class="btn btn-danger" >更新</button> 
-           
-            </td>
+           <td>
+            <input type="text" class="input-update" value= "{{ $task->name }}" name="name">  
+           </td>
+           <td>
+            <button type="submit" class="btn btn-danger" >更新</button> 
+           </td>
           </form> 
            <td>
-          <form action="{{ route('todo.destroy', [ 'id' => $task->id]) }}" method="post"> 
-         @csrf 
-         
-         
-                   <button type="submit" class="btn btn-danger">削除</button> 
-           </form> 
-        
-
-          </td>
-                   
-        
-           @endforeach
-      </div> 
+            <form action="{{ route('todo.destroy', [ 'id' => $task->id]) }}" method="post"> 
+             @csrf 
+             <button type="submit" class="btn btn-danger">削除</button> 
+            </form> 
+           </td>
+        @endforeach
+       </div> 
       </table>
      </div>
   </div>
-    </body>
+</body>
 </html>

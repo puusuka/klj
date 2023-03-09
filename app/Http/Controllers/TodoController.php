@@ -21,7 +21,7 @@ class TodoController extends Controller
 
     // 犬が鳴く（動物クラスのbarkをオーバーライド
     // public function bark() {
-        // return $this->name . ' barks Wan Wan';
+    // return $this->name . ' barks Wan Wan';
     // }
 // }
 // / これみたいに継承して上書きすることができる。（オーバーライド）

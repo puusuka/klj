@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 //   Requestの機能を使うため。
 //依存注入により、現在のHTTPリクエストインスタンスを取得するには、タイプヒントでIlluminate\Http\Requestクラスをコントローラーメソッドに指定します。  
 use App\Models\tasks;                 
-// ファイルがある場所
+// ファイルがある場所,
+//モデルとコントローラーをつなぐchord
 use App\Http\Requests\ClientRequest;    
-// ファイルがある場所
+// ファイルがある場所、ClientRequestを使うためのchord
 
 
 class TodoController extends Controller
@@ -94,6 +95,15 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
+     public function post(ClientRequest $request)
+   {
+    //    $validate_rule = [
+        //    'name' => 'required',
+        //    'name' => 'max:20'
+    //    ];
+    //    $this->validate($request, $validate_rule);
+       return view('todo/update.index', ['tasks' => $tasks]);
+   }
     public function show(todo $todo)
     {
         //
@@ -117,7 +127,7 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request,$id)
+    public function update(Request $request,$id)
     //$requestと$idを受け取るからここにはこうかく。
     {   $tasks = tasks::find($id);
         //(x)だとxのデータを所得する。

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-// こｎ
+// 
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +14,7 @@ class ClientRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->path() == '/todo/update') {
+        if ($this->path() == 'todo/update') {
       return true;
     } else {
       return false;
@@ -29,6 +29,7 @@ class ClientRequest extends FormRequest
     {
         return [
              'name' => 'required',
+             'name' => 'max:20'
         ];
     }
 }

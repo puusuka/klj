@@ -10,7 +10,7 @@
         {{--meta chrarset属性は、文字コードの指定をするタグです。 タグの中のchrarsetはキャラクターセットのことで、コンピューターに文字を理解させるために使います。--}}
         <meta name="viewport" content="width=device-width, initial-scale=2.0">
         <title>Lunchmap</title>
-        {{--タイトルはランチマップ--}}Kanta1208
+        {{--タイトルはランチマップ--}}
     </head>
         <style>
         * {
@@ -40,7 +40,7 @@
              }
  
         .card {
-	             top: 50%;
+	             margin:100px auto;
                background-color:white;
                width:54%;
                height:100%;
@@ -48,11 +48,7 @@
                border-radius: 8px;
                box-shadow: 0 4px 15px rgba(0,0,0,.2);
              }
-        {{-- CSSで中央寄せする方法
-            左右の中央揃え  
-            1. text-align: center;
-            インライン要素（画像やテキスト）はこれでオッケー
-          --}} 
+        {{--Todoを追加するとTodoリスト自体が大きくなるという時点で、上下中央寄せという概念は無くなります。例に挙げると、coachtechのサイトがあります。coachtechのサイトは、画面の高さには収まりません。そのため、上下中央寄せを実装していません。https://coachtech.site/例えば、Todoを追加してもTodoリスト自体が大きくならないよう、スクロールできるようなデザインにすれば、上下中央寄せをすることはできますが、現在作成しようとしているTodoでは、上下中央寄せする必要がありません。大きくなったり、小さくなったり大きさが変化する時点で上下中央寄せはできないのでしょうか？できなくなるというわけではないのですが、上下の場合見た目が悪くなるので、そのような実装をすることがほとんどありません。要素が上下に大きくなる場合は、上下の中央寄せはほとんどしません。要素が画面幅を超えて左右に大きくなる場合は、左右の中央寄せはほとんどしません。--}} 
          p
          {
           font-size:25px;
@@ -62,9 +58,10 @@
           }
          .table {
           width:100%;
-          margin:0 auto;
+          margin:30px auto;
           margin-left:30px;
           margin-top:40px;
+          line-height: 3;
           }
         .new {
           margin:10px auto;
@@ -106,6 +103,16 @@
        height:40px;  
        width:60px;
        border-radius: 8px;
+       color:orange;
+       border: 2px solid orange;
+       font-weight:bold;
+       background-color:white;
+
+      }
+      .updatebtn:hover 
+      { 
+       background-color:orange;
+       color:white;
       }
       .ProductTable 
       {
@@ -137,8 +144,15 @@
        height:40px;  
        width:60px;
        border-radius: 8px;
-       
-       
+       color:blue;
+       border: 2px solid blue;
+       font-weight:bold;
+       background-color:white;
+      }
+      .deletebtn:hover 
+      { 
+       background-color:blue;
+       color:white;
       }
     .input
      {
@@ -158,11 +172,14 @@
      <div class="card">
         <p>Todo List</p>
       <div class="new">
-          <form action="/todo/update" method="POST" >
+      <form action="/todo/update" method="post" >
+           @if ($errors->has('name'))
+              <tr><th>ERROR</th><td>{{$errors->first('name')}}</td></tr>
+           @endif
+           {{--バリデーションの部分もしえらーがあったらこれが出ますよ。--}}
+          
             @csrf
-            @if (count($errors) > 0)
-              <p>入力に問題があります</p>
-            @endif
+           
             <input type="text" class="input-update" value= "" name="name">
             <input type="submit" name="submit" value="追加" class="update" />
           </form>
@@ -181,7 +198,7 @@
            <td class="sakuseibi">
              {{ $task->created_at }}
            </td> 
-          <form action="{{ route('todo.new', [ 'id' => $task->id]) }}" method="POST"> 
+          <form action="{{ route('todo.new', [ 'id' => $task->id]) }}" method="post"> 
             @csrf 
            <td>
             <input type="text" class="input" value= "{{ $task->name }}" name="name">  

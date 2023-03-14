@@ -50,8 +50,12 @@ use App\Http\Controllers\TodoController;
 */
 // もっとも基本的なLaravelルートはURIとクロージャを引数に取り、複雑なルーティング設定ファイルなしでもルートと動作を定義できる、非常にシンプルで表現力豊かなメソッドを提供しています。
 Route::get('/todo', [TodoController::class, 'index'])->name('todo.list');
+
+
 // 　todoコントローラーのindexメソッドを使う。
 Route::post('/todo/update', [TodoController::class, 'store'])->name('todo.store');
+Route::post('/todo/update', [TodoController::class, 'post']);
+//上のやつはバリデーションのやつやけど順番を変えたら、エラー出る。ポストはあとになるようにになるようにする。
 // 第1引数にはURIを、第2引数にはそれによって呼び出される処理。[クラス名::class, ‘アクションメソッド名’]
 Route::post('/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
 // PHPではシングルアロー演算子(->)が配列へのアクセスに使うのに対して、ダブルアロー演算子(=>)は配列に値を代入するときに使います。https://webukatu.com/wordpress/blog/39841/#i，プロパティへのアクセス。

@@ -97,12 +97,24 @@ class TodoController extends Controller
      */
      public function post(ClientRequest $request)
    {
-    //    $validate_rule = [
-        //    'name' => 'required',
+        //$validate_rule = [
+          //  'name' => 'required',
         //    'name' => 'max:20'
-    //    ];
+        //];
     //    $this->validate($request, $validate_rule);
-       return view('todo/update.index', ['tasks' => $tasks]);
+        // $form = $request->all();
+        // tasks::post($form);
+        $request->validate([
+	     'name' => 'required',
+	    // 'name' => 'max:20',
+　　　　]
+    //   [
+        //     'name.required' => 'タイトルは必須です。',
+            //  'name.required'  => 'bodyは必須項目です。',
+    //   ]
+    //);
+       //return redirect('/todo');
+        return view('todo.index');
    }
     public function show(todo $todo)
     {

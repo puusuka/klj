@@ -174,7 +174,10 @@
       <div class="new">
       <form action="/todo/update" method="post" >
            @if ($errors->has('name'))
-              <tr><th>ERROR</th><td>{{$errors->first('name')}}</td></tr>
+             
+                <li>{{$errors->first('name')}}</li>
+             
+              <!-- <tr><th>ERROR</th><td>{{$errors->first('name')}}</td></tr> -->
            @endif
            {{--バリデーションの部分もしえらーがあったらこれが出ますよ。--}}
           

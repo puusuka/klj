@@ -14,12 +14,12 @@ class ClientRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->path() == 'todo/update') {
+       // if ($this->path() == '/todo/update') {
       return true;
-    } else {
-      return false;
-    }
-}
+    } //else {
+      //return false;
+    //}
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,7 +29,14 @@ class ClientRequest extends FormRequest
     {
         return [
              'name' => 'required',
-             'name' => 'max:20'
+             
         ];
     }
-}
+     public function messages()
+  {
+    return [
+      'name.required' => 'タスクを入力してください。',
+      
+    ];
+  }
+ }

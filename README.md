@@ -16,10 +16,11 @@
 Laravel　8.x、html、css
 
 ## テーブル設計
-< --- 作成したテーブル設計の画像 ---- >
+![2023-04-18 (5)](https://user-images.githubusercontent.com/114887507/232802430-9daf58fd-55c6-44b4-9d97-6f4c941eb06f.png)
+
 
 ## ER図
-< --- 作成したER図の画像 ---- >
+![2023-04-18 (4)](https://user-images.githubusercontent.com/114887507/232802231-966a916c-cd1b-4b90-ba4e-d2af479a1bfb.png)
 
 ## 他に記載することがあれば記述する
 例） ## 環境構築、## アカウントの種類（テストユーザーなど）

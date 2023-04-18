@@ -13,12 +13,12 @@
         {{--タイトルはランチマップ--}}
     </head>
         <style>
-        * {
+        {{--* {
            outline: 1px solid red !important;
-          }
+          }--}}
 
         body{
-          background-color:pink;
+          background-color:#000080;
           height:0px;
             }
         {{-- https://reffect.co.jp/html/block_and_inline_understanding#:~:text=%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82-,%E9%AB%98%E3%81%95(height)%E3%81%A8%E5%B9%85(width)%E3%81%AE%E8%A8%AD%E5%AE%9A,%E3%81%AF%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A6%E6%B1%BA%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82
@@ -86,8 +86,8 @@
        width:58px;
        border-radius: 5px;
        margin-left:60px;
-       color:#FF57B9;
-       border: 2px solid #FF57B9;
+       color:#CC33FF;
+       border: 2px solid #CC33FF;
        font-size:12px;
        font-weight:bold;
        background-color:white;
@@ -95,7 +95,7 @@
       }
       .update:hover 
       { 
-       background-color:#FF57B9;
+       background-color:#CC33FF;
        color:white;
       }
       .updatebtn 
@@ -103,15 +103,15 @@
        height:40px;  
        width:60px;
        border-radius: 8px;
-       color:orange;
-       border: 2px solid orange;
+       color:	#CC3300;
+       border: 2px solid 	#CC3300;
        font-weight:bold;
        background-color:white;
 
       }
       .updatebtn:hover 
       { 
-       background-color:orange;
+       background-color:#CC3300;
        color:white;
       }
       .ProductTable 
@@ -144,14 +144,14 @@
        height:40px;  
        width:60px;
        border-radius: 8px;
-       color:blue;
-       border: 2px solid blue;
+       color:#13f1fc;
+       border: 2px solid #13f1fc;
        font-weight:bold;
        background-color:white;
       }
       .deletebtn:hover 
       { 
-       background-color:blue;
+       background-color:#13f1fc;
        color:white;
       }
     .input
@@ -173,9 +173,10 @@
         <p>Todo List</p>
       <div class="new">
       <form action="/todo/update" method="post" >
-           @if ($errors->has('name'))
-             
-                <li>{{$errors->first('name')}}</li>
+           @if (count($errors) > 0)
+              @error('name')
+                <li>{{$message}}</li>
+              @enderror
              
               <!-- <tr><th>ERROR</th><td>{{$errors->first('name')}}</td></tr> -->
            @endif

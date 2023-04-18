@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class ClientRequest extends FormRequest
 {
     /**
@@ -28,15 +29,21 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-             'name' => 'required',
              
+               
+              'name' => 'required|max:20',
+              
         ];
     }
      public function messages()
   {
     return [
-      'name.required' => 'タスクを入力してください。',
+      
+       'name.max'  => 'タスクは20文字以内で入力してください。',
+       'name.required' => 'タスクを入力してください。',
+
       
     ];
   }
  }
+

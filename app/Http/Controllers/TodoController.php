@@ -70,8 +70,9 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( ClientRequest $request)  
     //丸括弧内には「Request $request」とありますが、このように記述することで「$requestにフォームやURLのパスパラメータから受け取った情報を代入」しています。より正確に説明すると、Requestクラスを$requestにインスタンス化している、のですが、現状はLaravelの機能で「Request 変数名」というように記述するとフォーム等に入力された情報を受け取ることができる。
+    // ClientRequestをつけるだけでバリデーションができる。
     {
          
         $tasks = new tasks;
@@ -85,7 +86,8 @@ class TodoController extends Controller
         $tasks->save();
         //作られたデータベースを保存する
         //  return view('index', ['tasks' => $tasks]);
-        return redirect()->route('todo.list', ['name' => $tasks->name]);
+        return redirect()->route('todo.list');
+        // ,['name' => $tasks->name]
 
     }
 
@@ -95,8 +97,8 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-     public function post(ClientRequest $request)
-   {
+    //  public function post(ClientRequest $request)
+//    {
         //$validate_rule = [
           //  'name' => 'required',
         //    'name' => 'max:20'
@@ -104,18 +106,19 @@ class TodoController extends Controller
     //    $this->validate($request, $validate_rule);
         // $form = $request->all();
         // tasks::post($form);
-        $request->validate([
-	     'name' => 'required',
-	    // 'name' => 'max:20',
-　　　　]
+       // $request->validate([
+	    // 'name' => 'required']);
+	    // 'name' => 'max:20',]);
     //   [
         //     'name.required' => 'タイトルは必須です。',
             //  'name.required'  => 'bodyは必須項目です。',
     //   ]
     //);
-       //return redirect('/todo');
-        return view('todo.index');
-   }
+       //return redirect('todo/update');
+        //return view('todo/update.store');
+    // return redirect()->route('todo.store');
+
+//    }
     public function show(todo $todo)
     {
         //
@@ -139,7 +142,7 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(ClientRequest $request,$id)
     //$requestと$idを受け取るからここにはこうかく。
     {   $tasks = tasks::find($id);
         //(x)だとxのデータを所得する。

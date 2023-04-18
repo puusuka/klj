@@ -54,7 +54,7 @@ Route::get('/todo', [TodoController::class, 'index'])->name('todo.list');
 
 // 　todoコントローラーのindexメソッドを使う。
 Route::post('/todo/update', [TodoController::class, 'store'])->name('todo.store');
-Route::post('/todo/update', [TodoController::class, 'post']);
+// Route::post('/todo/update', [TodoController::class, 'post']);
 //上のやつはバリデーションのやつやけど順番を変えたら、エラー出る。ポストはあとになるようにになるようにする。
 // 第1引数にはURIを、第2引数にはそれによって呼び出される処理。[クラス名::class, ‘アクションメソッド名’]
 Route::post('/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
@@ -72,10 +72,6 @@ Route::post('/todo/new/{id}', [TodoController::class, 'update'])->name('todo.new
 // メソッドやルートに指定するのは「get」と「post」のどちらかになります。
 
 // ページを表示する場合はget、データの処理（データの追加や削除、更新）を行う場合はpostメソッドを使用いたします。
-
-
-
-
 Route::get('/', function () {
     return redirect('/todo');
 });
